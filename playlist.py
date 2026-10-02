@@ -2,14 +2,12 @@ from datetime import datetime, timedelta
 
 
 def formatar_tempo(td):
-    """Formata um timedelta como HH:MM:SS."""
     total = int(td.total_seconds())
     h, resto = divmod(total, 3600)
     m, s = divmod(resto, 60)
     return f"{h:02d}:{m:02d}:{s:02d}"
 
 
-# ======================================================================
 class Musica:
     def __init__(self, i, t, art, alb, d):
         self.__id = i
@@ -53,13 +51,12 @@ class Musica:
                 f"Álbum: {self.__album} | Duração: {formatar_tempo(self.__duracao)}")
 
 
-# ======================================================================
-class PlayList:
+
     def __init__(self, i, n, d):
         self.__id = i
         self.__nome = n
         self.__descricao = d
-        self.__musicas = []  # atributo extra: músicas da playlist (para o tempo total)
+        self.__musicas = [] 
 
     def get_id(self):
         return self.__id
@@ -97,7 +94,6 @@ class PlayList:
                 f"Músicas: {len(self.__musicas)} | Tempo total: {formatar_tempo(self.TempoTotal())}")
 
 
-# ======================================================================
 class PlayListItem:
     def __init__(self, i, ip, im, d, s):
         self.__id = i
@@ -141,8 +137,6 @@ class PlayListItem:
                 f"Incluída em: {self.__data_inclusao.strftime('%d/%m/%Y %H:%M')} | "
                 f"Sequência: {self.__sequencia}")
 
-
-# ======================================================================
 class UI:
     def __init__(self):
         self.__playlists = []
@@ -152,7 +146,6 @@ class UI:
         self.__prox_musica = 1
         self.__prox_item = 1
 
-    # ---------- utilidades ----------
     @staticmethod
     def __ler_inteiro(msg):
         try:
@@ -201,7 +194,6 @@ class UI:
         for n, item in enumerate(self.__itens_da_playlist(id_playlist), start=1):
             item.set_sequencia(n)
 
-    # ---------- menus ----------
     def Main(self):
         op = -1
         while op != 0:
@@ -251,7 +243,7 @@ class UI:
             else:
                 print("Opção inválida.")
 
-    # ---------- playlists ----------
+
     def InserirPlaylist(self):
         nome = self.__ler_texto("Nome: ")
         desc = self.__ler_texto("Descrição: ")
@@ -284,7 +276,7 @@ class UI:
         self.__playlists.remove(p)
         print("Playlist excluída (e seus itens também)!")
 
-    # ---------- músicas ----------
+  
     def InserirMusica(self):
         titulo = self.__ler_texto("Título: ")
         artista = self.__ler_texto("Artista: ")
@@ -327,7 +319,7 @@ class UI:
         self.__musicas.remove(m)
         print("Música excluída (e removida das playlists)!")
 
-    # ---------- itens da playlist ----------
+ 
     def InserirItem(self):
         p = self.__buscar_playlist(self.__ler_inteiro("Id da playlist: "))
         if p is None:

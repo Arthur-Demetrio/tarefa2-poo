@@ -2,7 +2,6 @@ from datetime import datetime, timedelta
 
 
 def formatar_tempo(td):
-    """Formata um timedelta como HH:MM:SS."""
     total = int(td.total_seconds())
     h, resto = divmod(total, 3600)
     m, s = divmod(resto, 60)
@@ -15,8 +14,6 @@ class Treino:
         self.__data = dt
         self.__distancia = ds
         self.__tempo = t
-
-    # ---------- get ----------
     def get_id(self):
         return self.__id
 
@@ -29,7 +26,6 @@ class Treino:
     def get_tempo(self):
         return self.__tempo
 
-    # ---------- set ----------
     def set_id(self, id):
         self.__id = id
 
@@ -42,7 +38,6 @@ class Treino:
     def set_tempo(self, t):
         self.__tempo = t
 
-    # ---------- métodos ----------
     def Pace(self):
         """Tempo médio gasto por quilômetro (timedelta)."""
         if self.__distancia <= 0:
@@ -64,7 +59,6 @@ class TreinoUI:
         self.__treinos = []
         self.__proximo_id = 1
 
-    # ---------- leitura de dados ----------
     @staticmethod
     def __ler_data(msg, padrao=None):
         while True:
@@ -123,7 +117,6 @@ class TreinoUI:
                 return t
         return None
 
-    # ---------- operações ----------
     def Main(self):
         op = 0
         while op != 7:
